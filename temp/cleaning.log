@@ -1,0 +1,313 @@
+-----------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/lutfisun/Desktop/turkey_convicts/analysis/../temp/cleaning.log
+  log type:  text
+ opened on:  12 May 2021, 14:22:43
+
+. 
+. *-------------------------------------------------------------------------------
+. * clean turkey convicts
+. *-------------------------------------------------------------------------------
+. 
+. import delimited "../data/turkey_convicts_mid.csv"
+(encoding automatically selected: ISO-8859-2)
+(132 vars, 1,620 obs)
+
+. destring *, ignore("NA") replace
+year already numeric; no replace
+province: contains characters not specified in ignore(); no replace
+region_code: contains characters not specified in ignore(); no replace
+population already numeric; no replace
+gdpk already numeric; no replace
+prisons_total already numeric; no replace
+prisons_closed already numeric; no replace
+prisons_open already numeric; no replace
+prisons_semiopen already numeric; no replace
+prisons_juvenile already numeric; no replace
+cr_educ_total already numeric; no replace
+cr_educ_illiterate already numeric; no replace
+cr_educ_litnoschool already numeric; no replace
+cr_educ_primaryfour already numeric; no replace
+cr_educ_primaryeight already numeric; no replace
+cr_educ_juniorhs already numeric; no replace
+cr_educ_hs already numeric; no replace
+cr_educ_uni already numeric; no replace
+cr_educ_unknown already numeric; no replace
+cd_type_total: characters N A removed; replaced as long
+(486 missing values generated)
+cr_type_total: characters N A removed; replaced as long
+(486 missing values generated)
+cd_type_homicide: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_homicide: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_assault: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_assault: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_sexual: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_sexual: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_kidnapping: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_kidnapping: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_defamation: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_defamation: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_theft: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_theft: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_robbery: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_robbery: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_swindling: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_swindling: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_drugspc: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_drugspc: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_drugsuse: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_drugsuse: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_forgery: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_forgery: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_badtreatment: characters N A removed; replaced as byte
+(486 missing values generated)
+cr_type_badtreatment: characters N A removed; replaced as byte
+(486 missing values generated)
+cd_type_embezzlement: characters N A removed; replaced as byte
+(486 missing values generated)
+cr_type_embezzlement: characters N A removed; replaced as byte
+(486 missing values generated)
+cd_type_bribery: characters N A removed; replaced as byte
+(486 missing values generated)
+cr_type_bribery: characters N A removed; replaced as byte
+(486 missing values generated)
+cd_type_smuggling: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_smuggling: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_traffic: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_traffic: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_forestry: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_forestry: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_arms: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_arms: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_bankruptcy: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_bankruptcy: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_military: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_military: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_cheque: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_cheque: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_threat: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_threat: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_propertydamage: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_propertydamage: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_performanceprevention: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_performanceprevention: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_familyprotection: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_familyprotection: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_other: characters N A removed; replaced as int
+(486 missing values generated)
+cr_type_other: characters N A removed; replaced as int
+(486 missing values generated)
+cd_type_unknown: characters N A removed; replaced as byte
+(486 missing values generated)
+cr_type_unknown: characters N A removed; replaced as byte
+(486 missing values generated)
+registered_voters_loc: characters N A removed; replaced as long
+(1296 missing values generated)
+registered_voters_gen: characters N A removed; replaced as long
+(1215 missing values generated)
+registered_voters_ref: characters N A removed; replaced as long
+(1377 missing values generated)
+participation_rate: characters N A removed; replaced as double
+(1215 missing values generated)
+participation_rate15: characters N A removed; replaced as double
+(1539 missing values generated)
+participation_rate_loc: characters N A removed; replaced as double
+(1296 missing values generated)
+participation_ref: characters N A removed; replaced as double
+(1377 missing values generated)
+akp_gen: characters N A removed; replaced as byte
+(1215 missing values generated)
+akp_15: characters N A removed; replaced as byte
+(1539 missing values generated)
+chp_gen: characters N A removed; replaced as byte
+(1215 missing values generated)
+chp_15: characters N A removed; replaced as byte
+(1539 missing values generated)
+mhp_gen: characters N A removed; replaced as byte
+(1296 missing values generated)
+mhp_15: characters N A removed; replaced as byte
+(1539 missing values generated)
+hdp_gen: characters N A removed; replaced as byte
+(1458 missing values generated)
+hdp_15: characters N A removed; replaced as byte
+(1539 missing values generated)
+loc_mayors: characters N A removed; replaced as int
+(1296 missing values generated)
+mhp_loc: characters N A removed; replaced as byte
+(1296 missing values generated)
+akp_loc: characters N A removed; replaced as int
+(1296 missing values generated)
+chp_loc: characters N A removed; replaced as byte
+(1296 missing values generated)
+ref_yes: characters N A removed; replaced as double
+(1377 missing values generated)
+ref_no: characters N A removed; replaced as double
+(1377 missing values generated)
+crude_divorce_rate100: characters N A removed; replaced as double
+(81 missing values generated)
+divorce_byd_1_10: characters N A removed; replaced as int
+(81 missing values generated)
+divorce_byd_11_15: characters N A removed; replaced as int
+(81 missing values generated)
+divorce_byd_16: characters N A removed; replaced as int
+(81 missing values generated)
+divorce_byd_below1: characters N A removed; replaced as int
+(81 missing values generated)
+divorce_byd_1: characters N A removed; replaced as int
+(81 missing values generated)
+divorce_byd_2: characters N A removed; replaced as int
+(81 missing values generated)
+crude_suicide_rate1000: characters N A removed; replaced as double
+(81 missing values generated)
+suicides_male_total already numeric; no replace
+suicides_female_total: characters N A removed; replaced as int
+(2 missing values generated)
+suicides_male_below15 already numeric; no replace
+suicides_male_15 already numeric; no replace
+suicides_male_25 already numeric; no replace
+suicides_male_35 already numeric; no replace
+suicides_male_45 already numeric; no replace
+suicides_male_55 already numeric; no replace
+suicides_male_65 already numeric; no replace
+suicides_male_75 already numeric; no replace
+suicides_female_below15: characters N A removed; replaced as byte
+(2 missing values generated)
+suicides_female_15: characters N A removed; replaced as byte
+(2 missing values generated)
+suicides_female_25: characters N A removed; replaced as byte
+(2 missing values generated)
+suicides_female_35: characters N A removed; replaced as byte
+(2 missing values generated)
+suicides_female_45: characters N A removed; replaced as byte
+(2 missing values generated)
+suicides_female_55: characters N A removed; replaced as byte
+(2 missing values generated)
+suicides_female_65: characters N A removed; replaced as byte
+(2 missing values generated)
+suicides_female_75: characters N A removed; replaced as byte
+(2 missing values generated)
+vs_akp: characters N A removed; replaced as byte
+(81 missing values generated)
+vs_chp: characters N A removed; replaced as byte
+(81 missing values generated)
+vs_mhp: characters N A removed; replaced as byte
+(81 missing values generated)
+vs_hdp: characters N A removed; replaced as byte
+(81 missing values generated)
+ms_akp already numeric; no replace
+ms_chp already numeric; no replace
+ms_mhp already numeric; no replace
+educ_hs: characters N A removed; replaced as long
+(567 missing values generated)
+educ_col: characters N A removed; replaced as long
+(567 missing values generated)
+region: contains characters not specified in ignore(); no replace
+
+. 
+. drop region_code registered* particip* akp* chp* mhp* hdp* ref_*
+
+. 
+. replace vs_akp = . if year < 2002
+(162 real changes made, 162 to missing)
+
+. replace vs_chp = . if year < 2002
+(162 real changes made, 162 to missing)
+
+. replace vs_mhp = . if year < 2002
+(162 real changes made, 162 to missing)
+
+. replace vs_hdp = . if year < 2002
+(162 real changes made, 162 to missing)
+
+. replace ms_akp = . if year < 2004
+(324 real changes made, 324 to missing)
+
+. replace ms_chp = . if year < 2004
+(324 real changes made, 324 to missing)
+
+. replace ms_mhp = . if year < 2004
+(324 real changes made, 324 to missing)
+
+. 
+. *
+. sort province year
+
+. gen popi_ipo = population
+
+. replace popi_ipo = . if year<2008 & year>2000
+(567 real changes made, 567 to missing)
+
+. bysort province: ipolate popi_ipo year, g(popi)
+
+. *
+. bysort province: ipolate educ_hs year, g(educ_hsch)
+
+. bysort province: ipolate educ_col year, g(educ_coll)
+
+. 
+. order year province region population popi_ipo popi gdpk educ_hs* educ_col*
+
+. 
+. drop population popi_ipo educ_hs educ_col
+
+. 
+. sort province year
+
+. 
+. save "../data/turkey_convicts_clean.dta", replace
+file ../data/turkey_convicts_clean.dta saved
+
+. export delimited using "../data/turkey_convicts_clean.csv", replace
+file ../data/turkey_convicts_clean.csv saved
+
+. 
+. log close
+      name:  <unnamed>
+       log:  /Users/lutfisun/Desktop/turkey_convicts/analysis/../temp/cleaning.log
+  log type:  text
+ closed on:  12 May 2021, 14:22:44
+-----------------------------------------------------------------------------------------------------------------

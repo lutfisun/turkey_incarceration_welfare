@@ -1,0 +1,44 @@
+\begin{landscape}
+\begin{table}[H]
+\centering
+\caption{table}{The Relationship Between Mass Incarceration and Various Welfare Measures} \label{tab:title}
+\resizebox{\textwidth+9cm}{!}{%
+\begin{tabular}{l*{7}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}&\multicolumn{1}{c}{(7)}\\
+                    &\multicolumn{1}{c}{L.ln\_gdpk}&\multicolumn{1}{c}{L.divorce\_rate}&\multicolumn{1}{c}{L.young\_divorce}&\multicolumn{1}{c}{L.divorce\_y}&\multicolumn{1}{c}{L.suicide\_rate}&\multicolumn{1}{c}{L.suicide\_yrt}&\multicolumn{1}{c}{L.suicide\_y}\\
+                    &        b/se         &        b/se         &        b/se         &        b/se         &        b/se         &        b/se         &        b/se         \\
+\hline
+\\
+Population &      -0.000\sym{***}&      -0.000\sym{***}&      -0.000\sym{**} &       0.022\sym{***}&      -0.000\sym{***}&      -0.000\sym{*}  &       0.000\sym{***}\\
+                    &      (0.00)         &      (0.00)         &      (0.00)         &      (0.00)         &      (0.00)         &      (0.00)         &      (0.00)         \\
+High School &       0.000\sym{***}&       0.000\sym{***}&       0.000\sym{***}&       0.239\sym{***}&       0.000\sym{***}&       0.000\sym{*}  &       0.000\sym{***}\\
+                    &      (0.00)         &      (0.00)         &      (0.00)         &      (0.01)         &      (0.00)         &      (0.00)         &      (0.00)         \\
+Convictions per thousand             &       0.093\sym{***}&       0.205\sym{***}&       0.008\sym{***}&    2813.577\sym{**} &       0.895\sym{***}&       0.001\sym{***}&       3.866\sym{***}\\
+                    &      (0.01)         &      (0.03)         &      (0.00)         &   (1037.23)         &      (0.14)         &      (0.00)         &      (0.70)         \\
+period2: 2011-2015            &       0.992\sym{***}&      -0.675\sym{***}&      -0.004         &    7129.959         &      -0.453         &       0.002\sym{*}  &      18.175\sym{**} \\
+                    &      (0.12)         &      (0.20)         &      (0.01)         &   (8434.74)         &      (1.13)         &      (0.00)         &      (6.14)         \\
+period3: 2016-2019            &       0.726\sym{***}&      -0.601\sym{**} &      -0.010         &  -10673.978         &      -1.605         &       0.001         &       5.142         \\
+                    &      (0.13)         &      (0.22)         &      (0.01)         &   (8949.41)         &      (1.20)         &      (0.00)         &      (6.51)         \\
+\\
+CPK x period2          &      -0.005         &       0.134\sym{***}&       0.007\sym{***}&    4220.618\sym{**} &      -0.300         &      -0.000\sym{*}  &      -1.847         \\
+                    &      (0.02)         &      (0.04)         &      (0.00)         &   (1549.24)         &      (0.21)         &      (0.00)         &      (1.09)         \\
+CPK x period3          &      -0.037         &       0.023         &       0.002         &    3980.941\sym{**} &      -0.381\sym{*}  &      -0.000         &      -1.089         \\
+                    &      (0.02)         &      (0.03)         &      (0.00)         &   (1400.38)         &      (0.19)         &      (0.00)         &      (0.98)         \\
+\\
+Year FEs                &       Yes       &     Yes        &     Yes        &     Yes     &      Yes        &    Yes         &     Yes         \\
+Region FEs.           &       Yes       &     Yes        &     Yes        &     Yes     &      Yes        &    Yes         &     Yes         \\
+Year x Region FEs &       Yes       &     Yes        &     Yes        &     Yes     &      Yes        &    Yes         &     Yes         \\
+\\
+
+Intercept            &       7.780\sym{***}&       1.202\sym{***}&       0.038\sym{***}&  -12243.581\sym{*}  &       3.615\sym{***}&       0.001         &     -13.048\sym{**} \\
+                    &      (0.08)         &      (0.13)         &      (0.01)         &   (5394.63)         &      (0.73)         &      (0.00)         &      (3.96)         \\
+\hline
+R-sqr               &       0.884         &       0.715         &       0.701         &       0.981         &       0.193         &       0.269         &       0.922         \\
+dfres               &        1401         &        1327         &        1327         &        1327         &        1327         &        1399         &        1399         \\
+\hline\hline
+\multicolumn{8}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}%
+}
+\end{table}
+\end{landscape}

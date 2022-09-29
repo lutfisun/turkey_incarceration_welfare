@@ -1,0 +1,47 @@
+\begin{table}[H]
+\centering
+\caption{table}{The Relationship Between Mass Incarceration and Various Welfare Measures 2} \label{tab:title}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l*{3}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+                    &\multicolumn{1}{c}{L.ln\_gdpk}&\multicolumn{1}{c}{L.suicide\_yrt}&\multicolumn{1}{c}{L.divorce\_yrt}\\
+                    &        b/se         &        b/se         &        b/se         \\
+\hline
+Population &      -0.000\sym{***}&      -0.000         &      -0.000\sym{*}  \\
+                    &      (0.00)         &      (0.00)         &      (0.00)         \\
+High School &       0.000\sym{***}&       0.000\sym{*}  &       0.000\sym{**} \\
+                    &      (0.00)         &      (0.00)         &      (0.00)         \\
+Convictions wo 12 (pk)        &      -0.042\sym{**} &       0.000\sym{***}&       0.009\sym{***}\\
+                    &      (0.01)         &      (0.00)         &      (0.00)         \\
+Convictions w/ 12 (pk)           &       0.562\sym{***}&       0.000         &       0.010\sym{**} \\
+                    &      (0.05)         &      (0.00)         &      (0.00)         \\
+\\
+period2          &       0.804\sym{***}&       0.001         &       0.015         \\
+                    &      (0.11)         &      (0.00)         &      (0.01)         \\
+Rise11\_p75   &       0.033\sym{*}  &       0.000\sym{*}  &       0.005\sym{***}\\
+                    &      (0.02)         &      (0.00)         &      (0.00)         \\
+period2 $\times$ Rise11\_p75 &      -0.070\sym{*}  &       0.000         &       0.001         \\
+                    &      (0.03)         &      (0.00)         &      (0.00)         \\
+\\
+period3          &       0.183         &       0.001         &      -0.001         \\
+                    &      (0.12)         &      (0.00)         &      (0.01)         \\
+Rise16\_p75    &       0.066\sym{***}&       0.000\sym{*}  &       0.004\sym{**} \\
+                    &      (0.01)         &      (0.00)         &      (0.00)         \\
+period3 $\times$ Rise16\_p75 &      -0.131\sym{***}&      -0.000         &      -0.006\sym{*}  \\
+                    &      (0.03)         &      (0.00)         &      (0.00)         \\
+\\
+Year FEs                &       Yes       &     Yes        &     Yes        \\
+Region FEs.           &       Yes       &     Yes        &     Yes        \\
+Year x Region FEs &       Yes       &     Yes        &     Yes        \\
+\\
+Intercept            &       7.833\sym{***}&       0.001         &       0.030\sym{***}\\
+                    &      (0.07)         &      (0.00)         &      (0.01)         \\
+\hline
+R-sqr               &       0.894         &       0.274         &       0.707         \\
+dfres               &        1398         &        1396         &        1324         \\
+BIC                 &       322.9         &    -14373.6         &     -7237.3         \\
+\hline\hline
+\multicolumn{4}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}%
+}

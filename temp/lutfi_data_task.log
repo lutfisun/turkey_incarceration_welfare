@@ -1,0 +1,1545 @@
+-----------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/lutfisun/Desktop/turkey_convicts/analysis/../temp/lutfi_data_task.log
+  log type:  text
+ opened on:   3 Apr 2021, 14:45:09
+
+. 
+. import delimited "../data/turkey_convicts_clean.csv"
+(129 vars, 1,620 obs)
+
+. drop registered* particip* akp* chp* mhp* hdp* ref_*
+
+. replace vs_* = . if year < 2002
+too many variables specified
+r(103);
+
+. replace vs_akp = . if year < 2002
+type mismatch
+r(109);
+
+. export delimited using "/Users/lutfisun/Desktop/temp_vars.csv", replace
+(note: file /Users/lutfisun/Desktop/temp_vars.csv not found)
+file /Users/lutfisun/Desktop/temp_vars.csv saved
+
+. clear all
+
+. drop _all
+
+. import delimited "../data/temp_vars2.csv"
+(109 vars, 1,620 obs)
+
+. replace vs_akp = . if year < 2002
+(162 real changes made, 162 to missing)
+
+. replace vs_chp = . if year < 2002
+(162 real changes made, 162 to missing)
+
+. replace vs_mhp = . if year < 2002
+(162 real changes made, 162 to missing)
+
+. replace vs_hdp = . if year < 2002
+(162 real changes made, 162 to missing)
+
+. replace ms_akp = . if year < 2004
+(324 real changes made, 324 to missing)
+
+. replace ms_chp = . if year < 2004
+(324 real changes made, 324 to missing)
+
+. replace ms_mhp = . if year < 2004
+(324 real changes made, 324 to missing)
+
+. sort province year
+
+. export delimited using "/Users/lutfisun/Desktop/final_vars.csv", replace
+(note: file /Users/lutfisun/Desktop/final_vars.csv not found)
+file /Users/lutfisun/Desktop/final_vars.csv saved
+
+. clear all
+
+. 
+. import delimited "../data/country_comparison.csv"
+(4 vars, 127 obs)
+
+. 
+. tset year
+repeated time values in sample
+r(451);
+
+. import delimited "../data/turkey_convicts_clean.csv"
+no; data in memory would be lost
+r(4);
+
+. 
+. clear
+
+. import delimited "../data/turkey_convicts_clean.csv"
+(109 vars, 1,620 obs)
+
+. 
+. gen postcoup = (year > 2015)
+
+. gen postcoup_convicts = postcoup * cr_educ_total
+
+. reg gdpk cr_educ_total postcoup_convicts postcoup  pop_total
+variable pop_total not found
+r(111);
+
+. encode province, gen(enc_province)
+
+. reg gdpk cr_educ_total postcoup_convicts postcoup  pop_total i.enc_province
+variable pop_total not found
+r(111);
+
+. reg gdpk cr_educ_total postcoup_convicts postcoup  population  i.enc_province
+
+      Source |       SS           df       MS      Number of obs   =     1,620
+-------------+----------------------------------   F(84, 1535)     =     28.09
+       Model |  1.1354e+10        84   135163427   Prob > F        =    0.0000
+    Residual |  7.3859e+09     1,535  4811642.84   R-squared       =    0.6059
+-------------+----------------------------------   Adj R-squared   =    0.5843
+       Total |  1.8740e+10     1,619    11574799   Root MSE        =    2193.5
+
+-----------------------------------------------------------------------------------
+             gdpk |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+------------------+----------------------------------------------------------------
+    cr_educ_total |   .6369845   .0712756     8.94   0.000     .4971767    .7767924
+postcoup_convicts |  -.2817089   .0516687    -5.45   0.000    -.3830577   -.1803602
+         postcoup |   1004.126   159.3587     6.30   0.000     691.5425     1316.71
+       population |  -.0073023   .0004297   -16.99   0.000    -.0081452   -.0064595
+                  |
+     enc_province |
+        adiyaman  |  -9032.687   884.2144   -10.22   0.000    -10767.08   -7298.291
+  afyonkarahisar  |  -6910.608   841.4579    -8.21   0.000    -8561.137   -5260.079
+            agri  |  -10991.55   902.1812   -12.18   0.000    -12761.19   -9221.912
+         aksaray  |  -8618.446   926.7858    -9.30   0.000    -10436.35   -6800.545
+          amasya  |  -8386.279   932.6457    -8.99   0.000    -10215.67   -6556.884
+          ankara  |   21877.15   1225.302    17.85   0.000     19473.71    24280.59
+         antalya  |   3222.733    697.327     4.62   0.000     1854.919    4590.547
+         ardahan  |  -11152.52    992.984   -11.23   0.000    -13100.27    -9204.77
+          artvin  |  -8086.838   975.7366    -8.29   0.000    -10000.76    -6172.92
+           aydin  |  -5193.515   782.7525    -6.63   0.000    -6728.892   -3658.138
+       balikesir  |  -3206.183   755.9755    -4.24   0.000    -4689.037   -1723.329
+          bartin  |  -9871.732   971.3999   -10.16   0.000    -11777.14    -7966.32
+          batman  |  -9684.467   910.2779   -10.64   0.000    -11469.99   -7898.947
+         bayburt  |  -10857.13   1001.446   -10.84   0.000    -12821.48   -8892.784
+         bilecik  |  -4966.493   966.6967    -5.14   0.000    -6862.679   -3070.307
+          bingol  |  -10852.92   959.1454   -11.32   0.000    -12734.29   -8971.547
+          bitlis  |  -11055.87   942.8099   -11.73   0.000     -12905.2   -9206.538
+            bolu  |  -5143.615   945.3301    -5.44   0.000     -6997.89   -3289.339
+          burdur  |  -7461.305   951.7365    -7.84   0.000    -9328.146   -5594.464
+           bursa  |   6709.277   723.7024     9.27   0.000     5289.727    8128.827
+       canakkale  |  -5167.517   887.4143    -5.82   0.000     -6908.19   -3426.844
+         cankiri  |  -8976.725    968.793    -9.27   0.000    -10877.02   -7076.427
+           corum  |  -7924.606   881.2716    -8.99   0.000     -9653.23   -6195.983
+         denizli  |  -3963.901   795.7998    -4.98   0.000    -5524.871   -2402.931
+      diyarbakir  |  -4728.118   735.8581    -6.43   0.000    -6171.511   -3284.725
+           duzce  |  -7032.314   933.2873    -7.53   0.000    -8862.967   -5201.661
+          edirne  |  -6968.425   910.1064    -7.66   0.000    -8753.608   -5183.242
+          elazig  |  -7863.491   881.3936    -8.92   0.000    -9592.354   -6134.628
+        erzincan  |  -7637.372   958.3561    -7.97   0.000    -9517.198   -5757.546
+         erzurum  |  -7277.974   834.1687    -8.72   0.000    -8914.205   -5641.743
+       eskisehir  |  -2796.757   828.8967    -3.37   0.001    -4422.646   -1170.867
+       gaziantep  |  -2598.338   718.0908    -3.62   0.000    -4006.881   -1189.795
+         giresun  |  -8727.751   906.1651    -9.63   0.000     -10505.2   -6950.299
+       gumushane  |  -9739.246   982.9019    -9.91   0.000    -11667.22   -7811.273
+         hakkari  |  -11079.89   962.3128   -11.51   0.000    -12967.48   -9192.306
+           hatay  |  -3424.248   742.0415    -4.61   0.000    -4879.771   -1968.726
+           igdir  |  -10821.76   977.7692   -11.07   0.000    -12739.66   -8903.854
+         isparta  |  -7254.502   904.3283    -8.02   0.000    -9028.351   -5480.652
+        istanbul  |   68378.07   4018.001    17.02   0.000     60496.72    76259.43
+           izmir  |   13139.62   1022.222    12.85   0.000     11134.52    15144.72
+   kahramanmaras  |  -5707.152   795.8197    -7.17   0.000    -7268.161   -4146.143
+         karabuk  |  -8403.607   961.5972    -8.74   0.000    -10289.79   -6517.424
+         karaman  |  -7332.563   958.7619    -7.65   0.000    -9213.184   -5451.941
+            kars  |  -10758.46   945.3513   -11.38   0.000    -12612.77   -8904.141
+       kastamonu  |  -7865.768   923.2349    -8.52   0.000    -9676.703   -6054.833
+         kayseri  |  -2352.586   759.5476    -3.10   0.002    -3842.447   -862.7255
+           kilis  |   -11202.4   991.6307   -11.30   0.000    -13147.49   -9257.305
+       kirikkale  |    -8231.4   943.2543    -8.73   0.000     -10081.6   -6381.196
+      kirklareli  |  -5433.437   929.7952    -5.84   0.000    -7257.241   -3609.634
+        kirsehir  |  -9209.186    961.174    -9.58   0.000    -11094.54   -7323.833
+         kocaeli  |   6182.925   723.4514     8.55   0.000     4763.867    7601.982
+           konya  |   1189.688   695.3664     1.71   0.087    -174.2801    2553.657
+         kutahya  |  -6725.035   869.6314    -7.73   0.000    -8430.826   -5019.244
+         malatya  |  -7001.753   839.6598    -8.34   0.000    -8648.755   -5354.752
+          manisa  |  -2018.916   732.4671    -2.76   0.006    -3455.658   -582.1743
+          mardin  |  -8267.332   861.2861    -9.60   0.000    -9956.754    -6577.91
+          mersin  |  -1007.587   705.2467    -1.43   0.153    -2390.936    375.7621
+           mugla  |   -2986.53   819.6946    -3.64   0.000    -4594.369    -1378.69
+             mus  |  -10474.91   929.2375   -11.27   0.000    -12297.62     -8652.2
+        nevsehir  |  -8871.014   944.7101    -9.39   0.000    -10724.07   -7017.955
+           nigde  |   -9040.01   934.5664    -9.67   0.000    -10873.17   -7206.848
+            ordu  |  -7223.994   838.7024    -8.61   0.000    -8869.117    -5578.87
+        osmaniye  |  -9118.869   902.6793   -10.10   0.000    -10889.48   -7348.254
+            rize  |  -7374.587     936.32    -7.88   0.000    -9211.189   -5537.985
+         sakarya  |  -3858.381   814.8898    -4.73   0.000    -5456.796   -2259.966
+          samsun  |  -3688.692   749.3149    -4.92   0.000    -5158.481   -2218.903
+       sanliurfa  |  -4815.843     738.32    -6.52   0.000    -6264.066   -3367.621
+           siirt  |  -11097.38   955.5299   -11.61   0.000    -12971.66   -9223.096
+           sinop  |  -9619.971   966.7048    -9.95   0.000    -11516.17   -7723.769
+          sirnak  |  -10162.77   928.9801   -10.94   0.000    -11984.98   -8340.569
+           sivas  |  -6860.273   861.8976    -7.96   0.000    -8550.895   -5169.652
+        tekirdag  |  -980.0935   826.7566    -1.19   0.236    -2601.785    641.5984
+           tokat  |  -8168.574   858.7181    -9.51   0.000    -9852.959   -6484.189
+         trabzon  |  -4854.264   829.9516    -5.85   0.000    -6482.223   -3226.305
+         tunceli  |  -8615.649   998.9858    -8.62   0.000    -10575.17   -6656.127
+            usak  |  -7922.723   930.7609    -8.51   0.000     -9748.42   -6097.025
+             van  |  -8265.147    814.715   -10.14   0.000    -9863.219   -6667.075
+          yalova  |  -6177.807   968.6142    -6.38   0.000    -8077.754    -4277.86
+          yozgat  |  -8597.895   895.7212    -9.60   0.000    -10354.86   -6840.928
+       zonguldak  |   -7295.76   866.7571    -8.42   0.000    -8995.913   -5595.607
+                  |
+            _cons |   16208.71   901.9783    17.97   0.000     14439.47    17977.95
+-----------------------------------------------------------------------------------
+
+. clear all
+
+. 
+. import delimited "../data/country_comparison.csv"
+(4 vars, 127 obs)
+
+. xtset country year
+string variables not allowed in varlist;
+country is a string variable
+r(109);
+
+. 
+. gen ec_country = encode(country)
+unknown function encode()
+r(133);
+
+. encode country, gen(enc_country)
+
+. xtset enc_country year
+       panel variable:  enc_country (unbalanced)
+        time variable:  year, 1990 to 2020, but with gaps
+                delta:  1 unit
+
+. tsline prison_total
+string variables not allowed in varlist;
+prison_total is a string variable
+r(109);
+
+. destring prison_total, dpcomma
+must specify either generate or replace option
+r(198);
+
+. destring varlist, dpcomma replace
+variable varlist not found
+r(111);
+
+. destring prison_total, dpcomma replace
+prison_total: contains nonnumeric characters; no replace
+
+. destring prison_total, replace ignore(,)
+ignore string must be enclosed with quotes to ignore commas or use options
+r(198);
+
+. destring prison_total, replace ignore(',')
+ignore string must be enclosed with quotes to ignore commas or use options
+r(198);
+
+. destring prison_total, replace ignore(",") force
+prison_total: character , removed; replaced as long
+
+. clear all
+
+. 
+. import delimited "../data/country_comparison.csv"
+(4 vars, 127 obs)
+
+. 
+. destring prison_total, replace ignore(",") force
+prison_total: character , removed; replaced as long
+
+. encode country, gen(enc_country)
+
+. xtset enc_country year
+       panel variable:  enc_country (unbalanced)
+        time variable:  year, 1990 to 2020, but with gaps
+                delta:  1 unit
+
+. tsline prison_total
+
+. xtline prison_total
+
+. xtline prison_rate
+
+. xtline prison_rate, overlay
+(note:  named style i not found in class symbol, default attributes used)
+
+. xtline prison_rate, overlay if country != united states of america
+option if not allowed
+r(198);
+
+. gen ln_prison_rate = log(prison_rate)
+
+. xtline ln_prison_rate, overlay
+
+. clear all
+
+. 
+. import delimited "../data/country_comparison.csv"
+(4 vars, 127 obs)
+
+. 
+. destring prison_total, replace ignore(",") force
+prison_total: character , removed; replaced as long
+
+. encode country, gen(enc_country)
+
+. xtset enc_country year
+       panel variable:  enc_country (unbalanced)
+        time variable:  year, 1990 to 2020, but with gaps
+                delta:  1 unit
+
+. 
+. xtline prison_rate, overlay
+(note:  named style i not found in class symbol, default attributes used)
+
+. gen ln_prison_rate = log(prison_rate)
+
+. xtline ln_prison_rate, overlay
+
+. 
+. gen prison_rate_gr = D.ln_prison_rate
+not sorted
+r(5);
+
+. sort country year
+
+. gen prison_rate_gr = D.ln_prison_rate
+not sorted
+r(5);
+
+. clear
+
+. *(2 variables, 10 observations pasted into data editor)
+
+. expand 3
+(20 observations created)
+
+. clear
+
+. *(2 variables, 10 observations pasted into data editor)
+
+. by country year: gen numid = _n
+not sorted
+r(5);
+
+. sort country
+
+. by country year: gen numid = _n
+not sorted
+r(5);
+
+. clear
+
+. *(2 variables, 20 observations pasted into data editor)
+
+. sort country
+
+. by country year: gen numid = _n
+not sorted
+r(5);
+
+. expand 3
+(40 observations created)
+
+. clear
+
+. *(2 variables, 20 observations pasted into data editor)
+
+. by country, sort: gen gfreq = _N
+
+. expand gfreq
+(20 observations created)
+
+. clear
+
+. *(2 variables, 20 observations pasted into data editor)
+
+. by country, sort: gen gfreq = _N
+
+. expand year
+(39,790 observations created)
+
+. clear
+
+. clear all
+
+. 
+. import delimited "../data/country_comparison.csv"
+(4 vars, 127 obs)
+
+. 
+. destring prison_total, replace ignore(",") force
+prison_total: character , removed; replaced as long
+
+. encode country, gen(enc_country)
+
+. xtset enc_country year
+       panel variable:  enc_country (unbalanced)
+        time variable:  year, 1990 to 2020, but with gaps
+                delta:  1 unit
+
+. tsfill
+
+. list, clean noobs
+
+       country   year   prison~l   prison~e   enc_coun~y  
+       armenia   1994       5354        161      armenia  
+                 1995          .          .      armenia  
+                 1996          .          .      armenia  
+       armenia   1997       7648        242      armenia  
+                 1998          .          .      armenia  
+                 1999          .          .      armenia  
+       armenia   2000       7281        236      armenia  
+                 2001          .          .      armenia  
+       armenia   2002       5789        190      armenia  
+                 2003          .          .      armenia  
+       armenia   2004       2856         94      armenia  
+                 2005          .          .      armenia  
+       armenia   2006       2873         95      armenia  
+                 2007          .          .      armenia  
+       armenia   2008       3539        119      armenia  
+                 2009          .          .      armenia  
+       armenia   2010       4807        162      armenia  
+                 2011          .          .      armenia  
+       armenia   2012       4532        153      armenia  
+                 2013          .          .      armenia  
+       armenia   2014       3923        132      armenia  
+                 2015          .          .      armenia  
+       armenia   2016       3873        129      armenia  
+                 2017          .          .      armenia  
+       armenia   2018       3536        119      armenia  
+    azerbaijan   1997      24851        317   azerbaijan  
+                 1998          .          .   azerbaijan  
+                 1999          .          .   azerbaijan  
+    azerbaijan   2000      23504        291   azerbaijan  
+                 2001          .          .   azerbaijan  
+    azerbaijan   2002      21293        260   azerbaijan  
+                 2003          .          .   azerbaijan  
+    azerbaijan   2004      17845        214   azerbaijan  
+                 2005          .          .   azerbaijan  
+    azerbaijan   2006      19559        229   azerbaijan  
+                 2007          .          .   azerbaijan  
+    azerbaijan   2008      20986        236   azerbaijan  
+                 2009          .          .   azerbaijan  
+    azerbaijan   2010      21971        241   azerbaijan  
+                 2011          .          .   azerbaijan  
+    azerbaijan   2012      20782        222   azerbaijan  
+                 2013          .          .   azerbaijan  
+    azerbaijan   2014      22526        235   azerbaijan  
+                 2015          .          .   azerbaijan  
+    azerbaijan   2016      22938        235   azerbaijan  
+                 2017          .          .   azerbaijan  
+    azerbaijan   2018      21861        219   azerbaijan  
+        france   1990      43913         78       france  
+                 1991          .          .       france  
+                 1992          .          .       france  
+                 1993          .          .       france  
+                 1994          .          .       france  
+        france   1995      51623         89       france  
+                 1996          .          .       france  
+                 1997          .          .       france  
+                 1998          .          .       france  
+                 1999          .          .       france  
+        france   2000      48049         82       france  
+                 2001          .          .       france  
+        france   2002      45319         76       france  
+                 2003          .          .       france  
+        france   2004      55355         91       france  
+                 2005          .          .       france  
+        france   2006      55633         91       france  
+                 2007          .          .       france  
+        france   2008      59468         96       france  
+                 2009          .          .       france  
+                 2010          .          .       france  
+        france   2011      62467         99       france  
+                 2012          .          .       france  
+                 2013          .          .       france  
+        france   2014      72796        114       france  
+                 2015          .          .       france  
+        france   2016      71190        110       france  
+                 2017          .          .       france  
+        france   2018      74244        114       france  
+                 2019          .          .       france  
+        france   2020      67731        104       france  
+       germany   1993      59833         74      germany  
+                 1994          .          .      germany  
+                 1995          .          .      germany  
+       germany   1996      64680         79      germany  
+                 1997          .          .      germany  
+       germany   1998      69917         85      germany  
+                 1999          .          .      germany  
+       germany   2000      70252         85      germany  
+                 2001          .          .      germany  
+       germany   2002      70977         86      germany  
+                 2003          .          .      germany  
+       germany   2004      79452         96      germany  
+                 2005          .          .      germany  
+       germany   2006      76629         93      germany  
+                 2007          .          .      germany  
+       germany   2008      72259         88      germany  
+                 2009          .          .      germany  
+       germany   2010      69385         85      germany  
+                 2011          .          .      germany  
+       germany   2012      65889         82      germany  
+                 2013          .          .      germany  
+       germany   2014      61872         76      germany  
+                 2015          .          .      germany  
+       germany   2016      62865         76      germany  
+                 2017          .          .      germany  
+       germany   2018      63643         77      germany  
+                 2019          .          .      germany  
+       germany   2020      63650         77      germany  
+        greece   1990       5270         52       greece  
+                 1991          .          .       greece  
+                 1992          .          .       greece  
+                 1993          .          .       greece  
+                 1994          .          .       greece  
+        greece   1995       5891         55       greece  
+                 1996          .          .       greece  
+                 1997          .          .       greece  
+                 1998          .          .       greece  
+                 1999          .          .       greece  
+        greece   2000       7625         70       greece  
+                 2001          .          .       greece  
+        greece   2002       8507         78       greece  
+                 2003          .          .       greece  
+        greece   2004       8726         79       greece  
+                 2005          .          .       greece  
+        greece   2006       9964         90       greece  
+                 2007          .          .       greece  
+        greece   2008      11645        104       greece  
+                 2009          .          .       greece  
+        greece   2010      11364        102       greece  
+                 2011          .          .       greece  
+        greece   2012      12479        113       greece  
+                 2013          .          .       greece  
+        greece   2014      12693        116       greece  
+                 2015          .          .       greece  
+        greece   2016       9611         89       greece  
+                 2017          .          .       greece  
+        greece   2018      10011         93       greece  
+                 2019          .          .       greece  
+        greece   2020      11195        104       greece  
+       hungary   1990      12319        119      hungary  
+                 1991          .          .      hungary  
+                 1992          .          .      hungary  
+                 1993          .          .      hungary  
+                 1994          .          .      hungary  
+       hungary   1995      12455        121      hungary  
+                 1996          .          .      hungary  
+                 1997          .          .      hungary  
+                 1998          .          .      hungary  
+                 1999          .          .      hungary  
+       hungary   2000      15539        152      hungary  
+                 2001          .          .      hungary  
+       hungary   2002      17838        176      hungary  
+                 2003          .          .      hungary  
+       hungary   2004      16543        164      hungary  
+                 2005          .          .      hungary  
+       hungary   2006      14821        147      hungary  
+                 2007          .          .      hungary  
+       hungary   2008      14743        147      hungary  
+                 2009          .          .      hungary  
+       hungary   2010      16328        163      hungary  
+                 2011          .          .      hungary  
+       hungary   2012      17179        173      hungary  
+                 2013          .          .      hungary  
+       hungary   2014      17890        182      hungary  
+                 2015          .          .      hungary  
+       hungary   2016      17658        180      hungary  
+                 2017          .          .      hungary  
+       hungary   2018      16303        167      hungary  
+                 2019          .          .      hungary  
+       hungary   2020      16400        167      hungary  
+        mexico   1990      93119        110       mexico  
+                 1991          .          .       mexico  
+                 1992          .          .       mexico  
+                 1993          .          .       mexico  
+                 1994          .          .       mexico  
+        mexico   1995      93574        101       mexico  
+                 1996          .          .       mexico  
+                 1997          .          .       mexico  
+        mexico   1998     128902        133       mexico  
+                 1999          .          .       mexico  
+        mexico   2000     154765        156       mexico  
+                 2001          .          .       mexico  
+        mexico   2002     172888        169       mexico  
+                 2003          .          .       mexico  
+        mexico   2004     193889        186       mexico  
+                 2005          .          .       mexico  
+        mexico   2006     210140        197       mexico  
+                 2007          .          .       mexico  
+        mexico   2008     219754        202       mexico  
+                 2009          .          .       mexico  
+        mexico   2010     219027        191       mexico  
+                 2011          .          .       mexico  
+        mexico   2012     239089        203       mexico  
+                 2013          .          .       mexico  
+        mexico   2014     255638        212       mexico  
+                 2015          .          .       mexico  
+        mexico   2016     217868        176       mexico  
+                 2017          .          .       mexico  
+        mexico   2018     197988        156       mexico  
+                 2019          .          .       mexico  
+        mexico   2020     200526        158       mexico  
+        turkey   1990      45606         81       turkey  
+                 1991          .          .       turkey  
+                 1992          .          .       turkey  
+                 1993          .          .       turkey  
+                 1994          .          .       turkey  
+        turkey   1995      46091         74       turkey  
+                 1996          .          .       turkey  
+                 1997          .          .       turkey  
+                 1998          .          .       turkey  
+                 1999          .          .       turkey  
+        turkey   2000      49512         73       turkey  
+                 2001          .          .       turkey  
+        turkey   2002      59429         85       turkey  
+                 2003          .          .       turkey  
+        turkey   2004      57930         81       turkey  
+                 2005          .          .       turkey  
+        turkey   2006      70277        101       turkey  
+                 2007          .          .       turkey  
+        turkey   2008     103235        144       turkey  
+                 2009          .          .       turkey  
+        turkey   2010     120814        164       turkey  
+                 2011          .          .       turkey  
+        turkey   2012     136020        180       turkey  
+                 2013          .          .       turkey  
+        turkey   2014     158837        204       turkey  
+                 2015          .          .       turkey  
+        turkey   2016     200339        251       turkey  
+                 2017          .          .       turkey  
+        turkey   2018     264842        324       turkey  
+                 2019          .          .       turkey  
+        turkey   2020     281190        344       turkey  
+        uk e&w   1990      45636         90       uk e&w  
+                 1991          .          .       uk e&w  
+                 1992          .          .       uk e&w  
+                 1993          .          .       uk e&w  
+                 1994          .          .       uk e&w  
+        uk e&w   1995      51047        100       uk e&w  
+                 1996          .          .       uk e&w  
+                 1997          .          .       uk e&w  
+                 1998          .          .       uk e&w  
+                 1999          .          .       uk e&w  
+        uk e&w   2000      64602        124       uk e&w  
+                 2001          .          .       uk e&w  
+        uk e&w   2002      70861        135       uk e&w  
+                 2003          .          .       uk e&w  
+        uk e&w   2004      74657        141       uk e&w  
+                 2005          .          .       uk e&w  
+        uk e&w   2006      78150        145       uk e&w  
+                 2007          .          .       uk e&w  
+        uk e&w   2008      82636        152       uk e&w  
+                 2009          .          .       uk e&w  
+        uk e&w   2010      84725        153       uk e&w  
+                 2011          .          .       uk e&w  
+        uk e&w   2012      86634        153       uk e&w  
+                 2013          .          .       uk e&w  
+        uk e&w   2014      85307        149       uk e&w  
+                 2015          .          .       uk e&w  
+        uk e&w   2016      85348        146       uk e&w  
+                 2017          .          .       uk e&w  
+        uk e&w   2018      82773        140       uk e&w  
+                 2019          .          .       uk e&w  
+        uk e&w   2020      85839        135       uk e&w  
+           usa   1990    1148702        457          usa  
+                 1991          .          .          usa  
+                 1992          .          .          usa  
+                 1993          .          .          usa  
+                 1994          .          .          usa  
+           usa   1995    1585586        592          usa  
+                 1996          .          .          usa  
+                 1997          .          .          usa  
+                 1998          .          .          usa  
+                 1999          .          .          usa  
+           usa   2000    1937482        683          usa  
+                 2001          .          .          usa  
+           usa   2002    2033022        703          usa  
+                 2003          .          .          usa  
+           usa   2004    2135335        725          usa  
+                 2005          .          .          usa  
+           usa   2006    2258792        752          usa  
+                 2007          .          .          usa  
+           usa   2008    2307504        755          usa  
+                 2009          .          .          usa  
+           usa   2010    2270142        731          usa  
+                 2011          .          .          usa  
+           usa   2012    2228424        707          usa  
+                 2013          .          .          usa  
+           usa   2014    2217947        693          usa  
+                 2015          .          .          usa  
+           usa   2016    2021600        655          usa  
+                 2017          .          .          usa  
+                 2018          .          .          usa  
+                 2019          .          .          usa  
+           usa   2020    1818700        654          usa  
+
+. ipolate prison_rate year, gen(y2)
+
+. bysort enc_country: ipolate prison_total year, g(prison_tot_ipo)
+
+. bysort enc_country: ipolate prison_rate year, g(prison_rate_ipo)
+
+. gen ln_prison_rate_ipo = log(prison_rate_ipo)
+
+. xtline ln_prison_rate_ipo, overlay
+(note:  named style i not found in class symbol, default attributes used)
+
+. gen prison_rate_gr = D.ln_prison_rate_ipo
+not sorted
+r(5);
+
+. sort enc_country year
+
+. gen prison_rate_gr = D.ln_prison_rate_ipo
+(10 missing values generated)
+
+. xtline prison_rate_gr, overlay
+
+. xtline prison_rate_gr
+
+. clear all
+
+. 
+. import delimited "../data/country_comparison.csv"
+(4 vars, 152 obs)
+
+. 
+. destring prison_total, replace ignore(",") force
+prison_total: character , removed; replaced as long
+
+. encode country, gen(enc_country)
+
+. xtset enc_country year
+       panel variable:  enc_country (unbalanced)
+        time variable:  year, 1990 to 2020, but with gaps
+                delta:  1 unit
+
+. 
+. tsfill
+
+. list, clean noobs
+
+       country   year   prison~l   prison~e   enc_coun~y  
+       armenia   1994       5354        161      armenia  
+                 1995          .          .      armenia  
+                 1996          .          .      armenia  
+       armenia   1997       7648        242      armenia  
+                 1998          .          .      armenia  
+                 1999          .          .      armenia  
+       armenia   2000       7281        236      armenia  
+                 2001          .          .      armenia  
+       armenia   2002       5789        190      armenia  
+                 2003          .          .      armenia  
+       armenia   2004       2856         94      armenia  
+                 2005          .          .      armenia  
+       armenia   2006       2873         95      armenia  
+                 2007          .          .      armenia  
+       armenia   2008       3539        119      armenia  
+                 2009          .          .      armenia  
+       armenia   2010       4807        162      armenia  
+                 2011          .          .      armenia  
+       armenia   2012       4532        153      armenia  
+                 2013          .          .      armenia  
+       armenia   2014       3923        132      armenia  
+                 2015          .          .      armenia  
+       armenia   2016       3873        129      armenia  
+                 2017          .          .      armenia  
+       armenia   2018       3536        119      armenia  
+    azerbaijan   1997      24851        317   azerbaijan  
+                 1998          .          .   azerbaijan  
+                 1999          .          .   azerbaijan  
+    azerbaijan   2000      23504        291   azerbaijan  
+                 2001          .          .   azerbaijan  
+    azerbaijan   2002      21293        260   azerbaijan  
+                 2003          .          .   azerbaijan  
+    azerbaijan   2004      17845        214   azerbaijan  
+                 2005          .          .   azerbaijan  
+    azerbaijan   2006      19559        229   azerbaijan  
+                 2007          .          .   azerbaijan  
+    azerbaijan   2008      20986        236   azerbaijan  
+                 2009          .          .   azerbaijan  
+    azerbaijan   2010      21971        241   azerbaijan  
+                 2011          .          .   azerbaijan  
+    azerbaijan   2012      20782        222   azerbaijan  
+                 2013          .          .   azerbaijan  
+    azerbaijan   2014      22526        235   azerbaijan  
+                 2015          .          .   azerbaijan  
+    azerbaijan   2016      22938        235   azerbaijan  
+                 2017          .          .   azerbaijan  
+    azerbaijan   2018      21861        219   azerbaijan  
+        france   1990      43913         78       france  
+                 1991          .          .       france  
+                 1992          .          .       france  
+                 1993          .          .       france  
+                 1994          .          .       france  
+        france   1995      51623         89       france  
+                 1996          .          .       france  
+                 1997          .          .       france  
+                 1998          .          .       france  
+                 1999          .          .       france  
+        france   2000      48049         82       france  
+                 2001          .          .       france  
+        france   2002      45319         76       france  
+                 2003          .          .       france  
+        france   2004      55355         91       france  
+                 2005          .          .       france  
+        france   2006      55633         91       france  
+                 2007          .          .       france  
+        france   2008      59468         96       france  
+                 2009          .          .       france  
+                 2010          .          .       france  
+        france   2011      62467         99       france  
+                 2012          .          .       france  
+                 2013          .          .       france  
+        france   2014      72796        114       france  
+                 2015          .          .       france  
+        france   2016      71190        110       france  
+                 2017          .          .       france  
+        france   2018      74244        114       france  
+                 2019          .          .       france  
+        france   2020      67731        104       france  
+       germany   1993      59833         74      germany  
+                 1994          .          .      germany  
+                 1995          .          .      germany  
+       germany   1996      64680         79      germany  
+                 1997          .          .      germany  
+       germany   1998      69917         85      germany  
+                 1999          .          .      germany  
+       germany   2000      70252         85      germany  
+                 2001          .          .      germany  
+       germany   2002      70977         86      germany  
+                 2003          .          .      germany  
+       germany   2004      79452         96      germany  
+                 2005          .          .      germany  
+       germany   2006      76629         93      germany  
+                 2007          .          .      germany  
+       germany   2008      72259         88      germany  
+                 2009          .          .      germany  
+       germany   2010      69385         85      germany  
+                 2011          .          .      germany  
+       germany   2012      65889         82      germany  
+                 2013          .          .      germany  
+       germany   2014      61872         76      germany  
+                 2015          .          .      germany  
+       germany   2016      62865         76      germany  
+                 2017          .          .      germany  
+       germany   2018      63643         77      germany  
+                 2019          .          .      germany  
+       germany   2020      63650         77      germany  
+        greece   1990       5270         52       greece  
+                 1991          .          .       greece  
+                 1992          .          .       greece  
+                 1993          .          .       greece  
+                 1994          .          .       greece  
+        greece   1995       5891         55       greece  
+                 1996          .          .       greece  
+                 1997          .          .       greece  
+                 1998          .          .       greece  
+                 1999          .          .       greece  
+        greece   2000       7625         70       greece  
+                 2001          .          .       greece  
+        greece   2002       8507         78       greece  
+                 2003          .          .       greece  
+        greece   2004       8726         79       greece  
+                 2005          .          .       greece  
+        greece   2006       9964         90       greece  
+                 2007          .          .       greece  
+        greece   2008      11645        104       greece  
+                 2009          .          .       greece  
+        greece   2010      11364        102       greece  
+                 2011          .          .       greece  
+        greece   2012      12479        113       greece  
+                 2013          .          .       greece  
+        greece   2014      12693        116       greece  
+                 2015          .          .       greece  
+        greece   2016       9611         89       greece  
+                 2017          .          .       greece  
+        greece   2018      10011         93       greece  
+                 2019          .          .       greece  
+        greece   2020      11195        104       greece  
+       hungary   1990      12319        119      hungary  
+                 1991          .          .      hungary  
+                 1992          .          .      hungary  
+                 1993          .          .      hungary  
+                 1994          .          .      hungary  
+       hungary   1995      12455        121      hungary  
+                 1996          .          .      hungary  
+                 1997          .          .      hungary  
+                 1998          .          .      hungary  
+                 1999          .          .      hungary  
+       hungary   2000      15539        152      hungary  
+                 2001          .          .      hungary  
+       hungary   2002      17838        176      hungary  
+                 2003          .          .      hungary  
+       hungary   2004      16543        164      hungary  
+                 2005          .          .      hungary  
+       hungary   2006      14821        147      hungary  
+                 2007          .          .      hungary  
+       hungary   2008      14743        147      hungary  
+                 2009          .          .      hungary  
+       hungary   2010      16328        163      hungary  
+                 2011          .          .      hungary  
+       hungary   2012      17179        173      hungary  
+                 2013          .          .      hungary  
+       hungary   2014      17890        182      hungary  
+                 2015          .          .      hungary  
+       hungary   2016      17658        180      hungary  
+                 2017          .          .      hungary  
+       hungary   2018      16303        167      hungary  
+                 2019          .          .      hungary  
+       hungary   2020      16400        167      hungary  
+        israel   1990       8622        189       israel  
+                 1991          .          .       israel  
+                 1992          .          .       israel  
+                 1993          .          .       israel  
+                 1994          .          .       israel  
+        israel   1995       7909        146       israel  
+                 1996          .          .       israel  
+                 1997          .          .       israel  
+                 1998          .          .       israel  
+                 1999          .          .       israel  
+        israel   2000       9421        158       israel  
+                 2001          .          .       israel  
+        israel   2002      10922        174       israel  
+                 2003          .          .       israel  
+        israel   2004      13605        208       israel  
+                 2005          .          .       israel  
+        israel   2006      20628        302       israel  
+                 2007          .          .       israel  
+        israel   2008      21894        305       israel  
+                 2009          .          .       israel  
+        israel   2010      20164        270       israel  
+                 2011          .          .       israel  
+        israel   2012      20195        263       israel  
+                 2013          .          .       israel  
+        israel   2014      20780        264       israel  
+                 2015          .          .       israel  
+        israel   2016      20368        253       israel  
+                 2017          .          .       israel  
+                 2018          .          .       israel  
+                 2019          .          .       israel  
+        israel   2020      18838        234       israel  
+        mexico   1990      93119        110       mexico  
+                 1991          .          .       mexico  
+                 1992          .          .       mexico  
+                 1993          .          .       mexico  
+                 1994          .          .       mexico  
+        mexico   1995      93574        101       mexico  
+                 1996          .          .       mexico  
+                 1997          .          .       mexico  
+        mexico   1998     128902        133       mexico  
+                 1999          .          .       mexico  
+        mexico   2000     154765        156       mexico  
+                 2001          .          .       mexico  
+        mexico   2002     172888        169       mexico  
+                 2003          .          .       mexico  
+        mexico   2004     193889        186       mexico  
+                 2005          .          .       mexico  
+        mexico   2006     210140        197       mexico  
+                 2007          .          .       mexico  
+        mexico   2008     219754        202       mexico  
+                 2009          .          .       mexico  
+        mexico   2010     219027        191       mexico  
+                 2011          .          .       mexico  
+        mexico   2012     239089        203       mexico  
+                 2013          .          .       mexico  
+        mexico   2014     255638        212       mexico  
+                 2015          .          .       mexico  
+        mexico   2016     217868        176       mexico  
+                 2017          .          .       mexico  
+        mexico   2018     197988        156       mexico  
+                 2019          .          .       mexico  
+        mexico   2020     200526        158       mexico  
+        poland   1990      50165        132       poland  
+                 1991          .          .       poland  
+                 1992          .          .       poland  
+                 1993          .          .       poland  
+                 1994          .          .       poland  
+        poland   1995      61136        160       poland  
+                 1996          .          .       poland  
+                 1997          .          .       poland  
+                 1998          .          .       poland  
+                 1999          .          .       poland  
+        poland   2000      70544        184       poland  
+                 2001          .          .       poland  
+        poland   2002      80467        211       poland  
+                 2003          .          .       poland  
+        poland   2004      80368        211       poland  
+                 2005          .          .       poland  
+        poland   2006      88647        232       poland  
+                 2007          .          .       poland  
+        poland   2008      83152        218       poland  
+                 2009          .          .       poland  
+        poland   2010      80728        212       poland  
+                 2011          .          .       poland  
+        poland   2012      84156        221       poland  
+                 2013          .          .       poland  
+        poland   2014      77371        204       poland  
+                 2015          .          .       poland  
+        poland   2016      71528        188       poland  
+                 2017          .          .       poland  
+        poland   2018      72204        190       poland  
+                 2019          .          .       poland  
+        poland   2020      74104        195       poland  
+        turkey   1990      45606         81       turkey  
+                 1991          .          .       turkey  
+                 1992          .          .       turkey  
+                 1993          .          .       turkey  
+                 1994          .          .       turkey  
+        turkey   1995      46091         74       turkey  
+                 1996          .          .       turkey  
+                 1997          .          .       turkey  
+                 1998          .          .       turkey  
+                 1999          .          .       turkey  
+        turkey   2000      49512         73       turkey  
+                 2001          .          .       turkey  
+        turkey   2002      59429         85       turkey  
+                 2003          .          .       turkey  
+        turkey   2004      57930         81       turkey  
+                 2005          .          .       turkey  
+        turkey   2006      70277        101       turkey  
+                 2007          .          .       turkey  
+        turkey   2008     103235        144       turkey  
+                 2009          .          .       turkey  
+        turkey   2010     120814        164       turkey  
+                 2011          .          .       turkey  
+        turkey   2012     136020        180       turkey  
+                 2013          .          .       turkey  
+        turkey   2014     158837        204       turkey  
+                 2015          .          .       turkey  
+        turkey   2016     200339        251       turkey  
+                 2017          .          .       turkey  
+        turkey   2018     264842        324       turkey  
+                 2019          .          .       turkey  
+        turkey   2020     281190        344       turkey  
+        uk e&w   1990      45636         90       uk e&w  
+                 1991          .          .       uk e&w  
+                 1992          .          .       uk e&w  
+                 1993          .          .       uk e&w  
+                 1994          .          .       uk e&w  
+        uk e&w   1995      51047        100       uk e&w  
+                 1996          .          .       uk e&w  
+                 1997          .          .       uk e&w  
+                 1998          .          .       uk e&w  
+                 1999          .          .       uk e&w  
+        uk e&w   2000      64602        124       uk e&w  
+                 2001          .          .       uk e&w  
+        uk e&w   2002      70861        135       uk e&w  
+                 2003          .          .       uk e&w  
+        uk e&w   2004      74657        141       uk e&w  
+                 2005          .          .       uk e&w  
+        uk e&w   2006      78150        145       uk e&w  
+                 2007          .          .       uk e&w  
+        uk e&w   2008      82636        152       uk e&w  
+                 2009          .          .       uk e&w  
+        uk e&w   2010      84725        153       uk e&w  
+                 2011          .          .       uk e&w  
+        uk e&w   2012      86634        153       uk e&w  
+                 2013          .          .       uk e&w  
+        uk e&w   2014      85307        149       uk e&w  
+                 2015          .          .       uk e&w  
+        uk e&w   2016      85348        146       uk e&w  
+                 2017          .          .       uk e&w  
+        uk e&w   2018      82773        140       uk e&w  
+                 2019          .          .       uk e&w  
+        uk e&w   2020      85839        135       uk e&w  
+           usa   1990    1148702        457          usa  
+                 1991          .          .          usa  
+                 1992          .          .          usa  
+                 1993          .          .          usa  
+                 1994          .          .          usa  
+           usa   1995    1585586        592          usa  
+                 1996          .          .          usa  
+                 1997          .          .          usa  
+                 1998          .          .          usa  
+                 1999          .          .          usa  
+           usa   2000    1937482        683          usa  
+                 2001          .          .          usa  
+           usa   2002    2033022        703          usa  
+                 2003          .          .          usa  
+           usa   2004    2135335        725          usa  
+                 2005          .          .          usa  
+           usa   2006    2258792        752          usa  
+                 2007          .          .          usa  
+           usa   2008    2307504        755          usa  
+                 2009          .          .          usa  
+           usa   2010    2270142        731          usa  
+                 2011          .          .          usa  
+           usa   2012    2228424        707          usa  
+                 2013          .          .          usa  
+           usa   2014    2217947        693          usa  
+                 2015          .          .          usa  
+           usa   2016    2021600        655          usa  
+                 2017          .          .          usa  
+                 2018          .          .          usa  
+                 2019          .          .          usa  
+           usa   2020    1818700        654          usa  
+
+. 
+. xtline prison_rate, overlay
+(note:  named style i not found in class symbol, default attributes used)
+
+. gen ln_prison_rate = log(prison_rate)
+(202 missing values generated)
+
+. xtline ln_prison_rate, overlay
+
+. 
+. bysort enc_country: ipolate prison_total year, g(prison_tot_ipo)
+
+. bysort enc_country: ipolate prison_rate year, g(prison_rate_ipo)
+
+. 
+. gen ln_prison_rate_ipo = log(prison_rate_ipo)
+
+. xtline ln_prison_rate_ipo, overlay
+
+. 
+. sort enc_country year
+
+. gen prison_rate_gr = D.ln_prison_rate_ipo
+(12 missing values generated)
+
+. 
+. xtline prison_rate_gr
+
+. do "/var/folders/f8/w4npxhxs30v0l9l498c7mfq40000gn/T//SD45030.000000"
+
+. clear all
+
+. 
+. import delimited "../data/country_comparison.csv"
+(4 vars, 153 obs)
+
+. 
+. destring prison_total, replace ignore(",") force
+prison_total: character , removed; replaced as long
+
+. encode country, gen(enc_country)
+
+. xtset enc_country year
+       panel variable:  enc_country (unbalanced)
+        time variable:  year, 1990 to 2020, but with gaps
+                delta:  1 unit
+
+. 
+. tsfill
+
+. list, clean noobs
+
+       country   year   prison~l   prison~e   enc_coun~y  
+    azerbaijan   1997      24851        317   azerbaijan  
+                 1998          .          .   azerbaijan  
+                 1999          .          .   azerbaijan  
+    azerbaijan   2000      23504        291   azerbaijan  
+                 2001          .          .   azerbaijan  
+    azerbaijan   2002      21293        260   azerbaijan  
+                 2003          .          .   azerbaijan  
+    azerbaijan   2004      17845        214   azerbaijan  
+                 2005          .          .   azerbaijan  
+    azerbaijan   2006      19559        229   azerbaijan  
+                 2007          .          .   azerbaijan  
+    azerbaijan   2008      20986        236   azerbaijan  
+                 2009          .          .   azerbaijan  
+    azerbaijan   2010      21971        241   azerbaijan  
+                 2011          .          .   azerbaijan  
+    azerbaijan   2012      20782        222   azerbaijan  
+                 2013          .          .   azerbaijan  
+    azerbaijan   2014      22526        235   azerbaijan  
+                 2015          .          .   azerbaijan  
+    azerbaijan   2016      22938        235   azerbaijan  
+                 2017          .          .   azerbaijan  
+    azerbaijan   2018      21861        219   azerbaijan  
+        france   1990      43913         78       france  
+                 1991          .          .       france  
+                 1992          .          .       france  
+                 1993          .          .       france  
+                 1994          .          .       france  
+        france   1995      51623         89       france  
+                 1996          .          .       france  
+                 1997          .          .       france  
+                 1998          .          .       france  
+                 1999          .          .       france  
+        france   2000      48049         82       france  
+                 2001          .          .       france  
+        france   2002      45319         76       france  
+                 2003          .          .       france  
+        france   2004      55355         91       france  
+                 2005          .          .       france  
+        france   2006      55633         91       france  
+                 2007          .          .       france  
+        france   2008      59468         96       france  
+                 2009          .          .       france  
+                 2010          .          .       france  
+        france   2011      62467         99       france  
+                 2012          .          .       france  
+                 2013          .          .       france  
+        france   2014      72796        114       france  
+                 2015          .          .       france  
+        france   2016      71190        110       france  
+                 2017          .          .       france  
+        france   2018      74244        114       france  
+                 2019          .          .       france  
+        france   2020      67731        104       france  
+       germany   1993      59833         74      germany  
+                 1994          .          .      germany  
+                 1995          .          .      germany  
+       germany   1996      64680         79      germany  
+                 1997          .          .      germany  
+       germany   1998      69917         85      germany  
+                 1999          .          .      germany  
+       germany   2000      70252         85      germany  
+                 2001          .          .      germany  
+       germany   2002      70977         86      germany  
+                 2003          .          .      germany  
+       germany   2004      79452         96      germany  
+                 2005          .          .      germany  
+       germany   2006      76629         93      germany  
+                 2007          .          .      germany  
+       germany   2008      72259         88      germany  
+                 2009          .          .      germany  
+       germany   2010      69385         85      germany  
+                 2011          .          .      germany  
+       germany   2012      65889         82      germany  
+                 2013          .          .      germany  
+       germany   2014      61872         76      germany  
+                 2015          .          .      germany  
+       germany   2016      62865         76      germany  
+                 2017          .          .      germany  
+       germany   2018      63643         77      germany  
+                 2019          .          .      germany  
+       germany   2020      63650         77      germany  
+        greece   1990       5270         52       greece  
+                 1991          .          .       greece  
+                 1992          .          .       greece  
+                 1993          .          .       greece  
+                 1994          .          .       greece  
+        greece   1995       5891         55       greece  
+                 1996          .          .       greece  
+                 1997          .          .       greece  
+                 1998          .          .       greece  
+                 1999          .          .       greece  
+        greece   2000       7625         70       greece  
+                 2001          .          .       greece  
+        greece   2002       8507         78       greece  
+                 2003          .          .       greece  
+        greece   2004       8726         79       greece  
+                 2005          .          .       greece  
+        greece   2006       9964         90       greece  
+                 2007          .          .       greece  
+        greece   2008      11645        104       greece  
+                 2009          .          .       greece  
+        greece   2010      11364        102       greece  
+                 2011          .          .       greece  
+        greece   2012      12479        113       greece  
+                 2013          .          .       greece  
+        greece   2014      12693        116       greece  
+                 2015          .          .       greece  
+        greece   2016       9611         89       greece  
+                 2017          .          .       greece  
+        greece   2018      10011         93       greece  
+                 2019          .          .       greece  
+        greece   2020      11195        104       greece  
+       hungary   1990      12319        119      hungary  
+                 1991          .          .      hungary  
+                 1992          .          .      hungary  
+                 1993          .          .      hungary  
+                 1994          .          .      hungary  
+       hungary   1995      12455        121      hungary  
+                 1996          .          .      hungary  
+                 1997          .          .      hungary  
+                 1998          .          .      hungary  
+                 1999          .          .      hungary  
+       hungary   2000      15539        152      hungary  
+                 2001          .          .      hungary  
+       hungary   2002      17838        176      hungary  
+                 2003          .          .      hungary  
+       hungary   2004      16543        164      hungary  
+                 2005          .          .      hungary  
+       hungary   2006      14821        147      hungary  
+                 2007          .          .      hungary  
+       hungary   2008      14743        147      hungary  
+                 2009          .          .      hungary  
+       hungary   2010      16328        163      hungary  
+                 2011          .          .      hungary  
+       hungary   2012      17179        173      hungary  
+                 2013          .          .      hungary  
+       hungary   2014      17890        182      hungary  
+                 2015          .          .      hungary  
+       hungary   2016      17658        180      hungary  
+                 2017          .          .      hungary  
+       hungary   2018      16303        167      hungary  
+                 2019          .          .      hungary  
+       hungary   2020      16400        167      hungary  
+        israel   1990       8622        189       israel  
+                 1991          .          .       israel  
+                 1992          .          .       israel  
+                 1993          .          .       israel  
+                 1994          .          .       israel  
+        israel   1995       7909        146       israel  
+                 1996          .          .       israel  
+                 1997          .          .       israel  
+                 1998          .          .       israel  
+                 1999          .          .       israel  
+        israel   2000       9421        158       israel  
+                 2001          .          .       israel  
+        israel   2002      10922        174       israel  
+                 2003          .          .       israel  
+        israel   2004      13605        208       israel  
+                 2005          .          .       israel  
+        israel   2006      20628        302       israel  
+                 2007          .          .       israel  
+        israel   2008      21894        305       israel  
+                 2009          .          .       israel  
+        israel   2010      20164        270       israel  
+                 2011          .          .       israel  
+        israel   2012      20195        263       israel  
+                 2013          .          .       israel  
+        israel   2014      20780        264       israel  
+                 2015          .          .       israel  
+        israel   2016      20368        253       israel  
+                 2017          .          .       israel  
+                 2018          .          .       israel  
+                 2019          .          .       israel  
+        israel   2020      18838        234       israel  
+         italy   1990      26150         46        italy  
+                 1991          .          .        italy  
+                 1992          .          .        italy  
+                 1993          .          .        italy  
+                 1994          .          .        italy  
+         italy   1995      46908         83        italy  
+                 1996          .          .        italy  
+                 1997          .          .        italy  
+                 1998          .          .        italy  
+                 1999          .          .        italy  
+         italy   2000      53165         93        italy  
+                 2001          .          .        italy  
+         italy   2002      55670         97        italy  
+                 2003          .          .        italy  
+         italy   2004      56068         96        italy  
+                 2005          .          .        italy  
+         italy   2006      39005         66        italy  
+                 2007          .          .        italy  
+         italy   2008      58127         97        italy  
+                 2009          .          .        italy  
+         italy   2010      67961        112        italy  
+                 2011          .          .        italy  
+         italy   2012      65701        110        italy  
+                 2013          .          .        italy  
+         italy   2014      53623         88        italy  
+                 2015          .          .        italy  
+         italy   2016      54653         90        italy  
+                 2017          .          .        italy  
+         italy   2018      59655         99        italy  
+                 2019          .          .        italy  
+         italy   2020      57847         96        italy  
+        mexico   1990      93119        110       mexico  
+                 1991          .          .       mexico  
+                 1992          .          .       mexico  
+                 1993          .          .       mexico  
+                 1994          .          .       mexico  
+        mexico   1995      93574        101       mexico  
+                 1996          .          .       mexico  
+                 1997          .          .       mexico  
+        mexico   1998     128902        133       mexico  
+                 1999          .          .       mexico  
+        mexico   2000     154765        156       mexico  
+                 2001          .          .       mexico  
+        mexico   2002     172888        169       mexico  
+                 2003          .          .       mexico  
+        mexico   2004     193889        186       mexico  
+                 2005          .          .       mexico  
+        mexico   2006     210140        197       mexico  
+                 2007          .          .       mexico  
+        mexico   2008     219754        202       mexico  
+                 2009          .          .       mexico  
+        mexico   2010     219027        191       mexico  
+                 2011          .          .       mexico  
+        mexico   2012     239089        203       mexico  
+                 2013          .          .       mexico  
+        mexico   2014     255638        212       mexico  
+                 2015          .          .       mexico  
+        mexico   2016     217868        176       mexico  
+                 2017          .          .       mexico  
+        mexico   2018     197988        156       mexico  
+                 2019          .          .       mexico  
+        mexico   2020     200526        158       mexico  
+        poland   1990      50165        132       poland  
+                 1991          .          .       poland  
+                 1992          .          .       poland  
+                 1993          .          .       poland  
+                 1994          .          .       poland  
+        poland   1995      61136        160       poland  
+                 1996          .          .       poland  
+                 1997          .          .       poland  
+                 1998          .          .       poland  
+                 1999          .          .       poland  
+        poland   2000      70544        184       poland  
+                 2001          .          .       poland  
+        poland   2002      80467        211       poland  
+                 2003          .          .       poland  
+        poland   2004      80368        211       poland  
+                 2005          .          .       poland  
+        poland   2006      88647        232       poland  
+                 2007          .          .       poland  
+        poland   2008      83152        218       poland  
+                 2009          .          .       poland  
+        poland   2010      80728        212       poland  
+                 2011          .          .       poland  
+        poland   2012      84156        221       poland  
+                 2013          .          .       poland  
+        poland   2014      77371        204       poland  
+                 2015          .          .       poland  
+        poland   2016      71528        188       poland  
+                 2017          .          .       poland  
+        poland   2018      72204        190       poland  
+                 2019          .          .       poland  
+        poland   2020      74104        195       poland  
+        turkey   1990      45606         81       turkey  
+                 1991          .          .       turkey  
+                 1992          .          .       turkey  
+                 1993          .          .       turkey  
+                 1994          .          .       turkey  
+        turkey   1995      46091         74       turkey  
+                 1996          .          .       turkey  
+                 1997          .          .       turkey  
+                 1998          .          .       turkey  
+                 1999          .          .       turkey  
+        turkey   2000      49512         73       turkey  
+                 2001          .          .       turkey  
+        turkey   2002      59429         85       turkey  
+                 2003          .          .       turkey  
+        turkey   2004      57930         81       turkey  
+                 2005          .          .       turkey  
+        turkey   2006      70277        101       turkey  
+                 2007          .          .       turkey  
+        turkey   2008     103235        144       turkey  
+                 2009          .          .       turkey  
+        turkey   2010     120814        164       turkey  
+                 2011          .          .       turkey  
+        turkey   2012     136020        180       turkey  
+                 2013          .          .       turkey  
+        turkey   2014     158837        204       turkey  
+                 2015          .          .       turkey  
+        turkey   2016     200339        251       turkey  
+                 2017          .          .       turkey  
+        turkey   2018     264842        324       turkey  
+                 2019          .          .       turkey  
+        turkey   2020     281190        344       turkey  
+        uk e&w   1990      45636         90       uk e&w  
+                 1991          .          .       uk e&w  
+                 1992          .          .       uk e&w  
+                 1993          .          .       uk e&w  
+                 1994          .          .       uk e&w  
+        uk e&w   1995      51047        100       uk e&w  
+                 1996          .          .       uk e&w  
+                 1997          .          .       uk e&w  
+                 1998          .          .       uk e&w  
+                 1999          .          .       uk e&w  
+        uk e&w   2000      64602        124       uk e&w  
+                 2001          .          .       uk e&w  
+        uk e&w   2002      70861        135       uk e&w  
+                 2003          .          .       uk e&w  
+        uk e&w   2004      74657        141       uk e&w  
+                 2005          .          .       uk e&w  
+        uk e&w   2006      78150        145       uk e&w  
+                 2007          .          .       uk e&w  
+        uk e&w   2008      82636        152       uk e&w  
+                 2009          .          .       uk e&w  
+        uk e&w   2010      84725        153       uk e&w  
+                 2011          .          .       uk e&w  
+        uk e&w   2012      86634        153       uk e&w  
+                 2013          .          .       uk e&w  
+        uk e&w   2014      85307        149       uk e&w  
+                 2015          .          .       uk e&w  
+        uk e&w   2016      85348        146       uk e&w  
+                 2017          .          .       uk e&w  
+        uk e&w   2018      82773        140       uk e&w  
+                 2019          .          .       uk e&w  
+        uk e&w   2020      85839        135       uk e&w  
+           usa   1990    1148702        457          usa  
+                 1991          .          .          usa  
+                 1992          .          .          usa  
+                 1993          .          .          usa  
+                 1994          .          .          usa  
+           usa   1995    1585586        592          usa  
+                 1996          .          .          usa  
+                 1997          .          .          usa  
+                 1998          .          .          usa  
+                 1999          .          .          usa  
+           usa   2000    1937482        683          usa  
+                 2001          .          .          usa  
+           usa   2002    2033022        703          usa  
+                 2003          .          .          usa  
+           usa   2004    2135335        725          usa  
+                 2005          .          .          usa  
+           usa   2006    2258792        752          usa  
+                 2007          .          .          usa  
+           usa   2008    2307504        755          usa  
+                 2009          .          .          usa  
+           usa   2010    2270142        731          usa  
+                 2011          .          .          usa  
+           usa   2012    2228424        707          usa  
+                 2013          .          .          usa  
+           usa   2014    2217947        693          usa  
+                 2015          .          .          usa  
+           usa   2016    2021600        655          usa  
+                 2017          .          .          usa  
+                 2018          .          .          usa  
+                 2019          .          .          usa  
+           usa   2020    1818700        654          usa  
+
+. 
+. xtline prison_rate, overlay
+(note:  named style i not found in class symbol, default attributes used)
+
+. gen ln_prison_rate = log(prison_rate)
+(207 missing values generated)
+
+. xtline ln_prison_rate, overlay
+
+. 
+. bysort enc_country: ipolate prison_total year, g(prison_tot_ipo)
+
+. bysort enc_country: ipolate prison_rate year, g(prison_rate_ipo)
+
+. 
+. gen ln_prison_rate_ipo = log(prison_rate_ipo)
+
+. xtline ln_prison_rate_ipo, overlay
+
+. 
+. sort enc_country year
+
+. gen prison_rate_gr = D.ln_prison_rate_ipo
+(12 missing values generated)
+
+. 
+. xtline prison_rate_gr
+
+. 
+end of do-file
+
+. gen ln_prison_ipo = log(prison_tot_ipo)
+
+. gen prison_gr = D.ln_prison_ipo
+(12 missing values generated)
+
+. xtline prison_gr
+
+. log close
+      name:  <unnamed>
+       log:  /Users/lutfisun/Desktop/turkey_convicts/analysis/../temp/lutfi_data_task.log
+  log type:  text
+ closed on:   3 Apr 2021, 21:12:54
+-----------------------------------------------------------------------------------------------

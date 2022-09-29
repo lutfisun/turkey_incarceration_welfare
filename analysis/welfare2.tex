@@ -1,0 +1,48 @@
+\begin{landscape}
+\begin{table}[H]
+\centering
+\caption{table}{The Relationship Between Mass Incarceration and Various Welfare Measures 2} \label{tab:title}
+\resizebox{\textwidth+9cm}{!}{%
+\begin{tabular}{l*{7}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}&\multicolumn{1}{c}{(7)}\\
+                    &\multicolumn{1}{c}{L.ln\_gdpk}&\multicolumn{1}{c}{L.divorce\_rate}&\multicolumn{1}{c}{L.young\_divorce}&\multicolumn{1}{c}{L.divorce\_y}&\multicolumn{1}{c}{L.suicide\_rate}&\multicolumn{1}{c}{L.suicide\_yrt}&\multicolumn{1}{c}{L.suicide\_y}\\
+                    &        b/se         &        b/se         &        b/se         &        b/se         &        b/se         &        b/se         &        b/se         \\
+\hline
+Population &      -0.000\sym{***}&      -0.000\sym{***}&      -0.000\sym{*}  &       0.019\sym{***}&      -0.000\sym{***}&      -0.000         &       0.000\sym{***}\\
+                    &      (0.00)         &      (0.00)         &      (0.00)         &      (0.00)         &      (0.00)         &      (0.00)         &      (0.00)         \\
+High School &       0.000\sym{***}&       0.000\sym{***}&       0.000\sym{***}&       0.252\sym{***}&       0.000\sym{***}&       0.000         &       0.000\sym{***}\\
+                    &      (0.00)         &      (0.00)         &      (0.00)         &      (0.01)         &      (0.00)         &      (0.00)         &      (0.00)         \\
+Convictions wo 12 (pk)       &      -0.051\sym{***}&       0.193\sym{***}&       0.010\sym{***}&    8954.004\sym{***}&       0.325\sym{*}  &       0.000\sym{**} &       3.373\sym{***}\\
+                    &      (0.01)         &      (0.02)         &      (0.00)         &   (1009.59)         &      (0.14)         &      (0.00)         &      (0.71)         \\
+Convictions w/ 12 (pk)            &       0.839\sym{***}&       0.303\sym{*}  &       0.002         &  -32896.780\sym{***}&       3.333\sym{***}&       0.002\sym{**} &       8.046\sym{*}  \\
+                    &      (0.08)         &      (0.14)         &      (0.01)         &   (5638.49)         &      (0.77)         &      (0.00)         &      (4.01)         \\
+period2            &       0.783\sym{***}&      -0.727\sym{***}&      -0.002         &    7978.269         &      -1.212         &       0.002\sym{*}  &      18.037\sym{**} \\
+                    &      (0.12)         &      (0.20)         &      (0.01)         &   (8311.08)         &      (1.13)         &      (0.00)         &      (6.10)         \\
+period3            &       0.424\sym{**} &      -0.699\sym{**} &      -0.008         &  -10395.336         &      -2.243         &       0.001         &      10.026         \\
+                    &      (0.13)         &      (0.22)         &      (0.01)         &   (9110.53)         &      (1.24)         &      (0.00)         &      (6.68)         \\
+\\
+Cw/12PK x period2      &      -0.226\sym{*}  &       0.508\sym{**} &       0.025\sym{***}&   34648.970\sym{***}&      -1.442         &      -0.002\sym{**} &      -9.687\sym{*}  \\
+                    &      (0.09)         &      (0.16)         &      (0.01)         &   (6640.84)         &      (0.90)         &      (0.00)         &      (4.79)         \\
+Cw/12PK x period3      &      -0.424\sym{***}&       0.063         &       0.009         &   35336.495\sym{***}&      -2.183\sym{**} &      -0.001\sym{*}  &      -9.387\sym{*}  \\
+                    &      (0.08)         &      (0.15)         &      (0.01)         &   (5934.64)         &      (0.81)         &      (0.00)         &      (4.26)         \\
+
+\\
+Year FEs                &       Yes       &     Yes        &     Yes        &     Yes     &      Yes        &    Yes         &     Yes         \\
+Region FEs.           &       Yes       &     Yes        &     Yes        &     Yes     &      Yes        &    Yes         &     Yes         \\
+Year x Region FEs &       Yes       &     Yes        &     Yes        &     Yes     &      Yes        &    Yes         &     Yes         \\
+\\
+
+
+Intercept            &       7.857\sym{***}&       1.188\sym{***}&       0.036\sym{***}&  -13109.966\sym{*}  &       3.860\sym{***}&       0.001         &     -12.955\sym{***}\\
+                    &      (0.07)         &      (0.13)         &      (0.01)         &   (5217.86)         &      (0.71)         &      (0.00)         &      (3.86)         \\
+\hline
+R-sqr               &       0.894         &       0.717         &       0.701         &       0.982         &       0.198         &       0.269         &       0.922         \\
+dfres               &        1400         &        1326         &        1326         &        1326         &        1326         &        1398         &        1398         \\
+BIC                 &       314.3         &      1878.5         &     -7219.0         &     32841.4         &      6877.7         &    -14377.7         &     12437.5         \\
+\hline\hline
+\multicolumn{8}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}%
+}
+\end{table}
+\end{landscape}

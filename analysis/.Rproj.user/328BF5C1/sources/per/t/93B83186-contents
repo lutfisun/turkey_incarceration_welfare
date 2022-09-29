@@ -1,0 +1,176 @@
+library(readr)
+library(tidyverse)
+
+# clean #
+sex_ratio <- read_csv("~/Desktop/life_turkey - sex_ratio.csv")
+
+# standardize #
+sex_ratio$province <- tolower(sex_ratio$province)
+
+sex_ratio$province <- gsub("ğ", "g", sex_ratio$province)
+sex_ratio$province <- gsub("ç", "c", sex_ratio$province)
+sex_ratio$province <- gsub('ı', 'i', sex_ratio$province)
+sex_ratio$province <- gsub("ö", "o", sex_ratio$province)
+sex_ratio$province <- gsub("ş", "s", sex_ratio$province)
+sex_ratio$province <- gsub("ü", "u", sex_ratio$province)
+
+# clean #
+
+depends <- read_csv("~/Desktop/dependency_ratio.csv")
+
+# standardize #
+depends$province <- tolower(depends$province)
+
+depends$province <- gsub("ğ", "g", depends$province)
+depends$province <- gsub("ç", "c", depends$province)
+depends$province <- gsub('ı', 'i', depends$province)
+depends$province <- gsub("ö", "o", depends$province)
+depends$province <- gsub("ş", "s", depends$province)
+depends$province <- gsub("ü", "u", depends$province)
+
+dep_dis <- merge(depends,diseases, by=c("year","province"), all = TRUE)
+
+life_tamo <- read_csv("~/Desktop/11_life_tamam_son.csv")
+
+life_death_fin <- merge(life_tamo,dep_dis, by=c("year","province"), all = TRUE)
+life_death_fin <- merge(life_death_fin,sex_ratio, by=c("year","province"), all = TRUE)
+
+write_csv(life_death_fin, 'life_death_fin2.csv')
+
+v <- c('a','b','c','e')
+
+'b' %in% v
+
+life_death_fin$party <- "akp"
+
+for (i in 1:1053) {
+  if (life_death_fin$year[i] < 2009) {
+    if (life_death_fin$province[i] %in% c("artvin", "canakkale", "edirne", "mersin", 
+                                          "izmir", "kirklareli", "mugla", "trabzon")) {
+      life_death_fin$party[i] <- "chp"
+    }
+    else if (life_death_fin$province[i] %in% c("diyarbakir", "hakkari", "tunceli", "batman", 
+                                          "sirnak")) {
+      life_death_fin$party[i] <- "hdp"
+    }
+    else if (life_death_fin$province[i] %in% c("gumushane", "kastamonu", "nigde", "igdir")) {
+      life_death_fin$party[i] <- "mhp"
+    }
+    else if (life_death_fin$province[i] %in% c("elazig", "eskisehir", "mardin", "ordu",
+                                               "bartin", "ardahan")) {
+      life_death_fin$party[i] <- "other"
+    } }
+  else if (life_death_fin$year[i] < 2014) {
+    if (life_death_fin$province[i] %in% c("antalya", "artvin", "aydin", "canakkale", 
+                                          "edirne", "giresun", "mersin", "izmir", 
+                                          "kirklareli", "mugla", "sinop", "tekirdag",
+                                          "zonguldak")) {
+      life_death_fin$party[i] <- "chp"
+    }
+    else if (life_death_fin$province[i] %in% c("diyarbakir", "hakkari", "siirt", "tunceli",
+                                               "van", "batman", "sirnak", "igdir")) {
+      life_death_fin$party[i] <- "hdp"
+    }
+    else if (life_death_fin$province[i] %in% c("adana", "balikesir", "gumushane", "isparta", 
+                                               "kastamonu", "manisa", "bartin", 
+                                               "karabuk", "osmaniye")) {
+      life_death_fin$party[i] <- "mhp"
+    }
+    else if (life_death_fin$province[i] %in% c("eskisehir", "sivas", "ordu",
+                                               "sanliurfa", "yalova")) {
+      life_death_fin$party[i] <- "other"
+    } }
+  else if (life_death_fin$year[i] > 2013) {
+    if (life_death_fin$province[i] %in% c("aydin", "burdur", "canakkale", "edirne", 
+                                          "eskisehir", "giresun", "hatay", "izmir",
+                                          "kirklareli", "mugla", "sinop", "tekirdag", 
+                                          "zonguldak","yalova")) {
+      life_death_fin$party[i] <- "chp"
+    }
+    else if (life_death_fin$province[i] %in% c("agri", "bitlis", "diyarbakir", "hakkari", 
+                                               "siirt", "tunceli", "van", "batman", 
+                                               "sirnak", "igdir")) {
+      life_death_fin$party[i] <- "hdp"
+    }
+    else if (life_death_fin$province[i] %in% c("adana", "kars", "isparta", "mersin", 
+                                               "manisa", "bartin", "karabuk", "osmaniye")) {
+      life_death_fin$party[i] <- "mhp"
+    }
+    else if (life_death_fin$province[i] %in% c("mardin")) {
+      life_death_fin$party[i] <- "other"
+    } }
+  }
+
+life_death_fin
+
+life_death_fin2 <- subset(life_death_fin, year<2019)
+
+
+akdeniz <- c("antalya", "burdur", "isparta", "mersin", 
+             "adana", "hatay", "osmaniye", "kahramanmaras")
+
+dogu <- c("malatya", "erzincan", "elazig", "tunceli", "bingol", "erzurum", "mus", 
+          "bitlis", "sirnak", "kars", "agri", "ardahan", "van", "igdir", "hakkari")
+
+ege <- c("izmir", "aydin", "mugla", "manisa", "denizli", "usak", 
+         "kutahya", "afyonkarahisar")
+
+guneydogu <- c("gaziantep", "kilis", "adiyaman", "sanliurfa", "diyarbakir", 
+               "mardin", "batman", "siirt")
+
+icanadolu <- c("eskisehir", "konya", "ankara", "cankiri", "aksaray", "kirikkale", 
+               "kirsehir", "yozgat", "nigde", "nevsehir", "kayseri", "karaman", "sivas")
+
+karadeniz <- c("bolu", "duzce", "zonguldak", "karabuk", "bartin", "kastamonu", "corum", 
+               "sinop", "samsun", "amasya", "tokat", "ordu", "giresun", "gumushane", 
+               "trabzon", "bayburt", "rize", "artvin")
+
+marmara <- c("canakkale", "balikesir", "edirne", "tekirdag", "kirklareli", "istanbul", 
+              "bursa", "yalova", "kocaeli", "bilecik", "sakarya")
+
+
+life_death_fin2$region <- NA
+
+for (i in 1:1053) {
+  if (life_death_fin2$province[i] %in% akdeniz) {
+    life_death_fin2$region[i] <- "akdeniz"
+  }
+  else if (life_death_fin2$province[i] %in% dogu) {
+    life_death_fin2$region[i] <- "dogu"
+  }
+  else if (life_death_fin2$province[i] %in% ege) {
+    life_death_fin2$region[i] <- "ege"
+  }
+  else if (life_death_fin2$province[i] %in% guneydogu) {
+    life_death_fin2$region[i] <- "guneydogu"
+  }
+  else if (life_death_fin2$province[i] %in% icanadolu) {
+    life_death_fin2$region[i] <- "icanadolu"
+  }
+  else if (life_death_fin2$province[i] %in% karadeniz) {
+    life_death_fin2$region[i] <- "karadeniz"
+  }
+  else if (life_death_fin2$province[i] %in% marmara) {
+    life_death_fin2$region[i] <- "marmara"
+  }
+}
+      
+life_death_fin2 <- subset(life_death_fin2, year>2008)
+
+educ_province <- read_csv("~/Desktop/educ_province.csv")
+educ_province$province <- tolower(educ_province$province)
+
+educ_province$province <- gsub("ğ", "g", educ_province$province)
+educ_province$province <- gsub("ç", "c", educ_province$province)
+educ_province$province <- gsub('ı', 'i', educ_province$province)
+educ_province$province <- gsub("ö", "o", educ_province$province)
+educ_province$province <- gsub("ş", "s", educ_province$province)
+educ_province$province <- gsub("ü", "u", educ_province$province)
+educ_province$province <- gsub(" ", "", educ_province$province)
+educ_province$province <- gsub("afyon", "afyonkarahisar", educ_province$province)
+
+educ_province <- subset(educ_province, 2008<year & year<2019)
+
+life_death_fin3 <- merge(life_death_fin2,educ_province, by=c("year","province"), all = TRUE)
+
+write_csv(life_death_fin3, 'life_death_oct15.csv')
